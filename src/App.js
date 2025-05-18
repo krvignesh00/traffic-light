@@ -19,9 +19,15 @@ const App = () => {
   const [light, setLight] = useState("yellow");
 
   useEffect(() => {
-    setTimeout(() => {
+
+    const interval = setInterval(()=>{
       setLight(lightConfig[light].next);
-    }, lightConfig[light].duration);
+    },lightConfig[light].duration);
+
+    return ()=> {
+      clearTimeout(interval);
+      console.log('Interval cleared!');
+    }
   }, [light]);
 
   return (
